@@ -6,7 +6,6 @@ happyo = []
 
 {TextListener} = require 'hubot/src/listener'
 
-
 module.exports = (robot) ->
   removeListener = (listener) ->
     index = robot.listeners.indexOf listener
@@ -26,14 +25,12 @@ module.exports = (robot) ->
     robot.listeners.push listener
 
   robot.respond /発表者\s+一覧/i, (msg) ->
-    msg.send "発表者一覧"
+    msg.send '発表者一覧'
     for name, idx in happyo
-      msg.send "  (#{idx})#{name}"
+      msg.send '  (#{idx})#{name}'
 
   robot.respond /発表者\s+追加/i, (msg) ->
-    msg.reply "発表者を追加します。終了する場合は <end> と入力してください。"
+    msg.reply '発表者を追加します。終了する場合は <end> と入力してください。'
     waitForResponse msg, (msg) ->
-      # ここら辺に追加用のコードを書く予定
-
-    
+      msg.reply '? '
 
