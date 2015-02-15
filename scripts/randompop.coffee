@@ -35,7 +35,7 @@ module.exports = (robot) ->
     listener = new TextListener robot, /.*/, (msg) ->
       {envelope} = msg
       if envelope.room is room and envelope.user.id is userId
-        if msg.envelope.message.text.toLowerCase() is '<end>'
+        if msg.envelope.message.text.toLowerCase() is 'end'
           removeListener listener
         else
           callback.apply null, arguments
@@ -47,12 +47,12 @@ module.exports = (robot) ->
       msg.send " #{idx + 1}:#{name} さん"
 
   robot.respond /presenter\s+add/i, (msg) ->
-    msg.reply '発表者をリストに追加します。終了する場合は <end> と入力してください。'
+    msg.reply '発表者をリストに追加します。終了する場合は end と入力してください。'
     waitForResponse msg, (msg) ->
       presenter = msg.envelope.message.text
       presenterList.push(presenter)
       msg.reply "'#{presenter}' さんをリストに追加しました。"
-      msg.reply '続けて発表者をリストに追加します。終了する場合は <end> と入力してください。'
+      msg.reply '続けて発表者をリストに追加します。終了する場合は end と入力してください。'
 
   robot.respond /presenter\s+del\s+([0-9]+)/i, (msg) ->
     idx = parseInt(msg.match[1]) - 1
